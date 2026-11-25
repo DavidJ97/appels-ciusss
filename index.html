@@ -1166,7 +1166,7 @@ body.in-world .dl-scrim{z-index:55}body.in-world .dl-menu{z-index:56}
   <h2>Admissibilité à la gratuité</h2>
   <p class="lede">Ouvrez SI-PMI/Panorama : âge et doses de Shingrix ou de Zostavax déjà reçues. <b>Ne questionnez pas le client sur ses problèmes de santé.</b></p>
   <div class="card glassy">
-    <div class="q"><span class="lab">Âge</span><div class="seg" data-k="zoage"><button data-v="80">80 ans et plus</button><button data-v="18">18 à 79 ans</button><button data-v="lt18">Moins de 18 ans</button></div></div>
+    <div class="q"><span class="lab">Âge</span><div class="seg" data-k="zoage"><button data-v="80">71 ans et plus</button><button data-v="18">18 à 70 ans</button><button data-v="lt18">Moins de 18 ans</button></div></div>
     <div class="q"><span class="lab">« Êtes-vous immunodéprimé ? »</span><div class="seg" data-k="zoimm"><button data-v="non">Non</button><button data-v="oui">Oui</button><button data-v="doute">Hésite</button></div>
       <p class="hint">Un client immunodéprimé le sait. S'il hésite : son système immunitaire doit être affaibli ; une maladie chronique ne suffit pas toujours. En cas de doute, prenez le rendez-vous : il sera évalué sur place.</p></div>
     <div class="q"><span class="lab">Antécédents</span><div class="seg" data-k="zoprev"><button data-v="non">Aucun</button><button data-v="shx">1re dose de Shingrix reçue</button><button data-v="zvx">Zostavax reçu</button><button data-v="zona">A déjà eu le zona</button></div>
@@ -1348,10 +1348,10 @@ body.in-world .dl-scrim{z-index:55}body.in-world .dl-menu{z-index:56}
   </div>
   <div data-p="zo" hidden>
   <h3>Gratuité (Shingrix, 2 doses)</h3>
-  <p>80 ans et plus : gratuit, minimum 10 mois entre les doses ; Clic Santé envoie un rappel pour la 2e dose. 18 ans et plus immunodéprimé : gratuit, minimum 2 mois ; la 2e dose est donnée sur place. 50 à 79 ans non immunodéprimé : recommandé mais payant en pharmacie. 18 à 49 ans avec maladie chronique : autorisé mais payant en pharmacie.</p>
+  <p>71 ans et plus : gratuit, minimum 10 mois entre les doses ; Clic Santé envoie un rappel pour la 2e dose. 18 ans et plus immunodéprimé : gratuit, minimum 2 mois ; la 2e dose est donnée sur place. 50 à 70 ans non immunodéprimé : recommandé mais payant en pharmacie. 18 à 49 ans avec maladie chronique : autorisé mais payant en pharmacie.</p>
   <h3>Cas spéciaux</h3>
   <p>Zostavax déjà reçu : Shingrix possible (2 doses) si groupe ciblé, 12 mois après le Zostavax. Zona déjà eu : 2 doses, 12 mois après l'épisode. 1re dose payée avant le programme : 2e dose gratuite si groupe ciblé, mêmes intervalles. COVID et zona en même temps : oui.</p>
-  <h3>Immunodéprimé et 80 ans et plus</h3>
+  <h3>Immunodéprimé et 71 ans et plus</h3>
   <p>Cochez « immunodéprimé ». Le client apporte sa liste de médicaments ; la raison est notée avec l'infirmière.</p>
   <h3>Exemples d'immunodépression (annexe I, ne pas interroger)</h3>
   <p>Cancer du sang ou tumeur maligne ; chimiothérapie, radiothérapie ou traitement immunodépresseur ; déficience immunitaire congénitale ; Crohn, colite ; greffe d'organe ; VIH ; cortisone 2 semaines ou plus, ou plus de 20 mg de prednisone par jour.</p>
@@ -5252,7 +5252,7 @@ const PROTO={rg:{t:'Vaccination rougeole',s:'Prise de RDV téléphonique, CIUSSS
              vp:{t:'Dépistage VPH',s:'Cancer du col de l\'utérus, CLSC Métro le mardi',steps:['Admissibilité','Rendez-vous']},
              vb:{t:'VRS bébés',s:'Nirsévimab (Beyfortus), saison 2026-2027',steps:['Identifier','Admissibilité','Réserver']},
              pr:{t:'Prélèvements en CLSC et PSL',s:'Prises de sang, analyses et cultures, 14 ans et plus',steps:['Admissibilité','Rendez-vous','Fin d\'appel']},
-             zo:{t:'Vaccin contre le zona',s:'Shingrix gratuit : 80 ans et plus, ou 18 ans et plus immunodéprimé',steps:['Admissibilité','Rendez-vous']}};
+             zo:{t:'Vaccin contre le zona',s:'Shingrix gratuit : 71 ans et plus, ou 18 ans et plus immunodéprimé',steps:['Admissibilité','Rendez-vous']}};
 let P='rg';
 const CAT={sante:2,voy:2,mil:2,ecole:1,autre:1};
 const GRID=[['avant','Né avant 1970',0],['g','Né de 1970 à 1979'],['sante','Stagiaire ou travailleur de la santé',2,1],['voy','Voyageur',2,1],['mil','Recrue militaire',2,1],['ecole','Garderie ou école',1,1],['autre','Autre',1,1],['apres','Né depuis 1980',2],['attest','Attestation : rougeole avant 1996',0],['sero','Sérologie positive',0]];
@@ -5881,23 +5881,23 @@ function zoEval(){
   const a=st.zoage,imm=st.zoimm;if(!a&&!imm)return null;
   if(a==='lt18')return{c:'stop',t:'Pas admissible',p:'Le vaccin est offert aux 18 ans et plus.',end:1,short:'Moins de 18 ans'};
   if(!a||!imm)return{c:'',t:'Âge et immunodépression',p:'Deux questions.',wait:1};
-  if(a==='18'&&imm==='non')return{c:'hold',t:'Pas gratuit',p:'50 à 79 ans : recommandé, mais payant en pharmacie. 18 à 49 ans avec maladie chronique : autorisé, payant en pharmacie.',end:1,short:'Non admissible à la gratuité, pharmacie'};
+  if(a==='18'&&imm==='non')return{c:'hold',t:'Pas gratuit',p:'50 à 70 ans : recommandé, mais payant en pharmacie. 18 à 49 ans avec maladie chronique : autorisé, payant en pharmacie.',end:1,short:'Non admissible à la gratuité, pharmacie'};
   if(!st.zoprev)return{c:'',t:'Antécédents',p:'Vérifiez SI-PMI : Shingrix, Zostavax ou zona.',wait:1};
   const need=zoNeed(),m=zoMonths();
   if(need&&m==null)return{c:'',t:'Date à inscrire',p:'Date de la dose ou de l\'épisode.',wait:1};
   if(need&&m<need)return{c:'hold',t:'Trop tôt',p:`Attendre ${need} mois (${m} mois écoulés). Rappeler à partir du ${zoAfter(need)}.`,end:1,short:'Intervalle non respecté'};
-  const cat=imm==='non'?'80 ans et plus':'immunodéprimé';
+  const cat=imm==='non'?'71 ans et plus':'immunodéprimé';
   return{c:'go',t:'Prendre rendez-vous',p:(imm==='doute'?'Le client sera évalué sur place. ':'')+'Catégorie : '+cat+'.',short:(st.zoprev==='shx'?'2e dose':'1re dose')+', catégorie '+cat};
 }
 function zoAfter(n){const d=new Date($('zodate').value+'T12:00');d.setMonth(d.getMonth()+n);return d.toLocaleDateString('fr-CA',{day:'numeric',month:'long',year:'numeric'})}
 const ZO={
   upd(){st.e=zoEval();$('zoDateRow').hidden=!st.zoprev||st.zoprev==='non';
     const n=zoNeed(),m=zoMonths();$('zoDateHint').textContent=n&&m!=null?`${m} mois écoulés, minimum ${n}`:'';
-    const imm=st.zoimm==='oui'||st.zoimm==='doute';$('zoCat').textContent=st.zoage?(imm?'Je suis une personne âgée de 18 ans et plus qui est immunodéprimée':'Je suis une personne âgée de 80 ans et plus'):'Selon l\'admissibilité';
+    const imm=st.zoimm==='oui'||st.zoimm==='doute';$('zoCat').textContent=st.zoage?(imm?'Je suis une personne âgée de 18 ans et plus qui est immunodéprimée':'Je suis une personne âgée de 71 ans et plus'):'Selon l\'admissibilité';
     $('zoSayP').textContent=imm?'« Apportez votre liste de médicaments. L\'infirmière évaluera sur place votre admissibilité au vaccin gratuit, et votre 2e dose sera fixée lors du premier rendez-vous. »':'« Votre rendez-vous est confirmé. Clic Santé vous enverra un rappel pour prendre votre 2e dose 10 mois après la première. »';},
-  verdict(){if(cur===0)return st.e||{c:'',t:'En attente',p:'80 ans et plus, ou 18 ans et plus immunodéprimé.'};
+  verdict(){if(cur===0)return st.e||{c:'',t:'En attente',p:'71 ans et plus, ou 18 ans et plus immunodéprimé.'};
     const w=$('zowhen').value;return st.zosite&&w&&$('zoSame').checked?{c:'done',t:fmt('zowhen'),p:st.zosite+'. Cochez la catégorie et enregistrez.'}:{c:'',t:'Site, heure et vérification',p:'Carré Décarie ou Parc-Extension.'}},
-  grid(){if(cur!==0)return'';const a=st.zoage,i=st.zoimm;const rows=[['a','80 ans et plus','Gratuit, 10 mois',a==='80'],['b','18 ans et plus immunodéprimé','Gratuit, 2 mois',i==='oui'||i==='doute'],['c','50 à 79 ans','Payant, pharmacie',a==='18'&&i==='non'],['d','18 à 49 ans, maladie chronique','Payant, pharmacie',false]];
+  grid(){if(cur!==0)return'';const a=st.zoage,i=st.zoimm;const rows=[['a','71 ans et plus','Gratuit, 10 mois',a==='80'],['b','18 ans et plus immunodéprimé','Gratuit, 2 mois',i==='oui'||i==='doute'],['c','50 à 70 ans','Payant, pharmacie',a==='18'&&i==='non'],['d','18 à 49 ans, maladie chronique','Payant, pharmacie',false]];
     return'<div class="gh"><span>Clientèle</span><span style="text-align:right">Shingrix</span></div>'+rows.map(([,t,x,on])=>`<div class="gr${on?' on':''}"><span>${t}</span><span class="n" style="white-space:normal">${x}</span></div>`).join('')},
   state(i){const e=st.e;if(i===0)return e&&!e.wait?(e.end?'no':'ok'):'';return st.zosite&&$('zowhen').value&&$('zoSame').checked?'ok':''},
   answer(i){const e=st.e;return[e&&!e.wait?e.short:'',[st.zosite,fmt('zowhen')].filter(Boolean).join(', ')][i]},
@@ -6820,7 +6820,7 @@ const World=(()=>{
   const Bd={on:false,scene:null,cam:null,node:null,walk:null,hud:null,hudTiles:[],signs:[],deco:[],t0:0,pend:null};
   const ZN={// chaque case : position (x,z), question, sorties
     START:{x:0,z:3,next:'AGE'},
-    AGE:{x:0,z:0,q:'Quel âge a la personne ?',sub:'Vérifie dans SI-PMI/Panorama.',k:'zoage',opts:{left:['80','80 ans et plus'],right:['18','18 à 79 ans'],down:['lt18','Moins de 18 ans']},next:'IMM'},
+    AGE:{x:0,z:0,q:'Quel âge a la personne ?',sub:'Vérifie dans SI-PMI/Panorama.',k:'zoage',opts:{left:['80','71 ans et plus'],right:['18','18 à 70 ans'],down:['lt18','Moins de 18 ans']},next:'IMM'},
     IMM:{x:0,z:-6,q:'« Êtes-vous immunodéprimé ? »',sub:'Ne questionne pas sur les problèmes de santé.',k:'zoimm',opts:{left:['non','Non'],up:['doute','Hésite'],right:['oui','Oui']},next:'PREV'},
     PREV:{x:0,z:-12,q:'Antécédents dans SI-PMI ?',sub:'Shingrix, Zostavax ou zona déjà eu.',k:'zoprev',opts:{left:['non','Aucun'],up:['shx','1re dose de Shingrix'],right:['zvx','Zostavax reçu'],down:['zona','A déjà eu le zona']},next:'DATE',ladder:{from:'left',to:'SITE'}},
     DATE:{x:0,z:-18,q:'Date de la dose ou du zona',npc:'zodate',type:'date',next:'SITE'},
